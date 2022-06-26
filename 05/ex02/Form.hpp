@@ -16,24 +16,27 @@ public:
 	friend std::ostream &operator<<(std::ostream &os, const Form &b);
 
 	const std::string &getName() const;
-	const int getRequired() const;
-	const bool isSigned() const;
+	int getRequired() const;
+	bool isSigned() const;
 	void beSigned(const Bureaucrat &b) throw(F_EXCEPT);
 	void isExecutable(const Bureaucrat &executor) const throw(F_EXCEPT);
 	virtual void execute(const Bureaucrat &executor) const throw(F_EXCEPT) =0;
 
 	class GradeTooHighException : public std::exception {
 	public:
+		using std::exception::what;
 		virtual const char *what();
 	};
 
 	class GradeTooLowException : public std::exception {
 	public:
+		using std::exception::what;
 		virtual const char *what();
 	};
 
 	class NonSignedException : public std::exception {
 	public:
+		using std::exception::what;
 		virtual const char *what();
 	};
 

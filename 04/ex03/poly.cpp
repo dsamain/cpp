@@ -11,7 +11,7 @@ AMateria::~AMateria() {
 
 std::string const &AMateria::getType() const {return _type;}
 
-void AMateria::use(ICharacter &target) {}
+void AMateria::use(ICharacter &target) {std::cout << target.getName();}
 
 // Ice
 Ice::Ice() : AMateria("ice") {
@@ -56,7 +56,7 @@ Character::Character(std::string const &name) : _name(name), _idx(0) {
 	std::cout << "Character constructor called\n";
 }
 
-Character::Character(Character const &cpy) : _idx(cpy._idx), _name(cpy._name) {
+Character::Character(Character const &cpy) : _name(cpy._name), _idx(cpy._idx) {
 
 	for (int i = 0; i < cpy._idx; i++)
 		_inv[i] = cpy._inv[i]->clone();

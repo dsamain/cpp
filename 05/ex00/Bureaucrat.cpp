@@ -9,7 +9,7 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) throw(GRADE_EXCEPT) :
 	//_name = name;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &cpy) : _grade(cpy._grade) {
+Bureaucrat::Bureaucrat(const Bureaucrat &cpy) : _name(cpy._name), _grade(cpy._grade) {
 }
 
 Bureaucrat::~Bureaucrat() {

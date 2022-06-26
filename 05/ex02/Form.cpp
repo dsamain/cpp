@@ -2,20 +2,21 @@
 #include "Form.hpp"
 
 Form::Form(const std::string &name, int required, int execRequired, const std::string &target) throw(F_EXCEPT) 
-: _name(name), _required(required), _signed(0), _execRequired(execRequired), _target(target) {
+: _name(name), _target(target), _required(required), _execRequired(execRequired), _signed(0) {
 	if (required <= 0 || execRequired <= 0)
 		throw Form::GradeTooHighException();
 	if (required > 150 || execRequired > 150)
 		throw Form::GradeTooLowException();
 }
 
-Form::Form(const Form &cpy) : _required(cpy._required), _execRequired(cpy._execRequired) {
+Form::Form(const Form &cpy) : _name(cpy._name), _target(cpy._target), _required(cpy._required), _execRequired(cpy._execRequired), _signed(cpy._signed) {
 }
 
 Form::~Form() {
 }  
 
 Form &Form::operator=(const Form &cpy) {
+	_signed = cpy._signed;
 	return *this;
 }
 
@@ -28,11 +29,11 @@ const std::string &Form::getName() const {
 	return _name;
 }
 
-const int Form::getRequired() const {
+int Form::getRequired() const {
 	return _required;
 }
 
-const bool Form::isSigned() const {
+bool Form::isSigned() const {
 	return _signed;
 }
 

@@ -17,16 +17,18 @@ public:
 	friend std::ostream &operator<<(std::ostream &os, const Form &b);
 
 	const std::string &getName() const;
-	const int getRequired() const;
+	int getRequired() const;
 	void beSigned(const Bureaucrat &b) throw(F_GRADE_EXCEPT);
 
 	class GradeTooHighException : public std::exception {
 	public:
+		using std::exception::what;
 		const char *what();
 	};
 
 	class GradeTooLowException : public std::exception {
 	public:
+		using std::exception::what;
 		const char *what();
 	};
 

@@ -24,7 +24,7 @@ int		main( void ) {
 	accounts_t				accounts( amounts, amounts + amounts_size );
 	accounts_t::iterator	acc_begin	= accounts.begin();
 	accounts_t::iterator	acc_end		= accounts.end();
-	int tab[] = {0, 1, 2, 3};
+	//int tab[] = {0, 1, 2, 3};
 
 	int	const			d[]			= { 5, 765, 564, 2, 87, 23, 9, 20 };
 	size_t const		d_size( sizeof(d) / sizeof(int) );

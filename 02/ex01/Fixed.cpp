@@ -6,19 +6,38 @@ Fixed::Fixed() {
 	_f_bits = 8;
 }
 
+Fixed::~Fixed() {
+	std::cout << "Destructor called" << std::endl;
+}  
+
 Fixed::Fixed(const int x) {
 	std::cout << "Int constructor called" << std::endl;
 	_val = x << 8;
 	_f_bits = 8;
 }
 
+Fixed::Fixed(const Fixed &cpy) {
+	std::cout << "Copy constructor called" << std::endl;
+	*this = cpy;
+}
+
+Fixed &Fixed::operator=(const Fixed &cpy) {
+	std::cout << "Copy assignement constructor called" << std::endl;
+	_val = cpy.getRawBits();
+	_f_bits = 8;
+	return (*this);
+}
 
 Fixed::Fixed(const float x) {
 	std::cout << "Float constructor called" << std::endl;
-	_f_bits = 8;
+
+	// The code below sould be equivalent to _val = x * 256
+	// It was made to check my comprension of float by
+	// doing the multiplication manually on the bitset
 	unsigned int t;
+
+	_f_bits = 8;
 	memcpy(&t, &x, 4);
-	//if ((t >> 31) & 1) t ^= (1 >> 31);
 	int exp=0, mantis=((t<<1) != 0);
 	for (int i = 7; i >= 0; i--)
 		exp = (exp << 1) | ((t >> (23 + i)) & 1);
@@ -28,21 +47,6 @@ Fixed::Fixed(const float x) {
 	_val = (exp <= 15 ? mantis >> (15-exp) : mantis << (exp-15)) | (((t >> 31) & 1) << 31);
 }
 
-Fixed::Fixed(const Fixed &cpy) {
-	std::cout << "Copy constructor called" << std::endl;
-	*this = cpy;
-}
-
-Fixed &Fixed::operator=(const Fixed &cpy) {
-	std::cout << "Assignement constructor called" << std::endl;
-	_val = cpy.getRawBits();
-	_f_bits = 8;
-	return (*this);
-}
-
-Fixed::~Fixed() {
-}  
-
 std::ostream &operator<<(std::ostream &out, const Fixed& op) {
 	std::cout << op.toFloat();
 	return out;
@@ -50,12 +54,12 @@ std::ostream &operator<<(std::ostream &out, const Fixed& op) {
 
 
 int Fixed::getRawBits() const {
-	std::cout << "getRawBits member function called" << std::endl;
+	//std::cout << "getRawBits member function called" << std::endl;
 	return _val;
 }
 
 void Fixed::setRawBits(int const raw) {
-	std::cout << "setRawBits member function called" << std::endl;
+	//std::cout << "setRawBits member function called" << std::endl;
 	_val = raw;
 }
 

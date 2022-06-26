@@ -6,9 +6,8 @@ Fixed::Fixed() {
 	_f_bits = 8;
 }
 
-Fixed::Fixed(const Fixed &cpy) {
+Fixed::Fixed(const Fixed &cpy) : _val(cpy._val), _f_bits(cpy._f_bits) {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = cpy;
 }
 
 Fixed &Fixed::operator=(const Fixed &cpy) {
@@ -19,6 +18,7 @@ Fixed &Fixed::operator=(const Fixed &cpy) {
 }
 
 Fixed::~Fixed() {
+	std::cout << "Destructor called" << std::endl;
 }  
 
 int Fixed::getRawBits() const {

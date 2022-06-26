@@ -5,7 +5,7 @@ uintptr_t serialize(Data *ptr) {
 }
 
 Data *deserialize(uintptr_t raw) {
-	Data *out;
+	Data *out = new Data;
 
 	out->val = raw;
 	return out;

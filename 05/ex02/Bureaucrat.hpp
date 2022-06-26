@@ -26,11 +26,13 @@ public:
 
 	class GradeTooHighException : public std::exception {
 	public:
+		using std::exception::what;
 		const char *what();
 	};
 
 	class GradeTooLowException : public std::exception {
 	public:
+		using std::exception::what;
 		const char *what();
 	};
 

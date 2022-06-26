@@ -13,7 +13,7 @@ public:
 	Array(const unsigned int n) {
 		_arr = new T*[n];
 		_size = n;
-		for (int i = 0; i < n; i++)
+		for (unsigned int i = 0; i < n; i++)
 			_arr[i] = new T;
 	}
 
@@ -47,7 +47,7 @@ public:
 		return *_arr[i];
 	}
 
-	const int size() {
+	int size() {
 		return (_size);
 	}
 
@@ -58,7 +58,7 @@ private:
 
 template<typename T>
 void printArray(Array<T> &arr) {
-	for (int i = 0; i < arr.size(); i++)
+	for (int i = 0; i < (int)arr.size(); i++)
 		std::cout << arr[i] << " "[i == arr.size()-1];
 	std::cout << std::endl;
 }

@@ -3,7 +3,7 @@
 Base::~Base() {}
 
 Base *generate() {
-	Base *out;
+	Base *out = new Base;
 
 	switch (rand()%3) {
 		case 0:
@@ -63,8 +63,6 @@ bool refIdC(Base &p) {
 }
 
 void identify(Base &p) {
-	Base *ptr;
-
 	std::cout << "A"[!refIdA(p)];
 	std::cout << "B"[!refIdB(p)];
 	std::cout << "C"[!refIdC(p)];
@@ -73,7 +71,7 @@ void identify(Base &p) {
 }
 
 int main() {
-	Base *ptr;
+	Base *ptr ;
 
 	srand(time(NULL));
 	for (int i = 0; i < 10; i++) {

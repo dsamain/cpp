@@ -6,7 +6,6 @@ PhoneBook::PhoneBook() : idx(0) {
 PhoneBook::~PhoneBook() {}
 
 void PhoneBook::add() {
-	int val;
 	std::cout << "Adding contact:\n"; 
 	std::string out[] = {"	First Name: ", "\n	Name: ", "\n	Nickname: ", "\n	Phone: ", "\n	Secret: "};
 	std::string info[5];
@@ -15,7 +14,7 @@ void PhoneBook::add() {
 		std::cin >> info[i];
 	}
 	contacts[idx].assign(info);
-	idx = (idx + 1) % 8;	
+	idx = idx % 8 + 1;	
 }
 
 void PhoneBook::search() {

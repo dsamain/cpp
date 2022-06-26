@@ -19,7 +19,7 @@ int main(int ac, char **av) {
 		t.clear();
 		getline(f_in, t);
 		if (f) f_out << std::endl;
-		for (int i = 0; i < t.size();) {
+		for (int i = 0; i < (int)t.size();) {
 			if (s1 != "" && t.substr(i, s1.size()) == s1) {
 				f_out << s2;
 				i += s1.size();

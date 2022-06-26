@@ -1,10 +1,12 @@
 NAME = megaphone 
 SRC = megaphone.cpp
 OBJ = $(SRC:.cpp=.o)
-
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 CC = c++ $(FLAGS)
+
+.cpp.o:
+	$(CC) $(FLAGS) -c $(SRC)
 
 all: $(NAME)
 

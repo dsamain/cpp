@@ -10,15 +10,15 @@ int main( void ) {
 	Fixed c( 42.42f );
 	Fixed d( b );
 	b++;
-	std::cout << b << std::endl;
+	std::cout << "b: " << b << std::endl;
 	b--;
-	std::cout << b << std::endl;
+	std::cout << "b: " << b << std::endl;
 	++b;
-	std::cout << b << std::endl;
+	std::cout << "b: " << b << std::endl;
 	--b;
-	std::cout << b << std::endl;
-	std::cout << b+c << std::endl;
-	std::cout << c-b << std::endl;
-	std::cout << b*c << std::endl;
-	std::cout << b/c << std::endl;
+	std::cout << "b: " << b << std::endl;
+	std::cout << "b+c: " << b+c << std::endl;
+	std::cout << "c-b: " << c-b << std::endl;
+	std::cout << "b*c: " << b*c << std::endl;
+	std::cout << "b/c: " << b/c << std::endl;
 }

@@ -22,12 +22,14 @@ public:
 
 	class GradeTooHighException : public std::exception {
 	public:
+		using std::exception::what;
 		const char *what();
 	};
 
 	class GradeTooLowException : public std::exception {
 	public:
-		const char *what();
+		using std::exception::what;
+		virtual const char *what();
 	};
 
 private:

@@ -1,16 +1,10 @@
 #include "Harl.hpp"
 
 Harl::Harl() {
-	//void (Harl::*_action[0]) () = {&Harl::debug};
 	_action[0] = &Harl::debug;
 	_action[1] = &Harl::info;
 	_action[2] = &Harl::warning;
 	_action[3] = &Harl::error;
-	//std::cout << "test" << std::endl;
-	//_action[0] = this->debug;
-	//_action[1] = &Harl::info;
-	//_action[2] = &Harl::warning;
-	//_action[3] = &Harl::error;
 }
 
 Harl::~Harl() {

@@ -1,24 +1,28 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << std::endl;
+	//std::cout << "Default constructor called" << std::endl;
 	_val = 0;
 	_f_bits = 8;
 }
 
 Fixed::Fixed(const int x) {
-	std::cout << "Int constructor called" << std::endl;
+	//std::cout << "Int constructor called" << std::endl;
 	_val = x << 8;
 	_f_bits = 8;
 }
 
 
 Fixed::Fixed(const float x) {
-	std::cout << "Float constructor called" << std::endl;
-	_f_bits = 8;
+	//std::cout << "Float constructor called" << std::endl;
+
+	// The code below sould be equivalent to _val = x * 256
+	// It was made to check my comprension of float by
+	// doing the multiplication manually on the bitset
 	unsigned int t;
+
+	_f_bits = 8;
 	memcpy(&t, &x, 4);
-	//if ((t >> 31) & 1) t ^= (1 >> 31);
 	int exp=0, mantis=((t<<1) != 0);
 	for (int i = 7; i >= 0; i--)
 		exp = (exp << 1) | ((t >> (23 + i)) & 1);
@@ -29,12 +33,12 @@ Fixed::Fixed(const float x) {
 }
 
 Fixed::Fixed(const Fixed &cpy) {
-	std::cout << "Copy constructor called" << std::endl;
+	//std::cout << "Copy constructor called" << std::endl;
 	*this = cpy;
 }
 
 Fixed &Fixed::operator=(const Fixed &cpy) {
-	std::cout << "Assignement constructor called" << std::endl;
+	//std::cout << "Assignement constructor called" << std::endl;
 	_val = cpy.getRawBits();
 	_f_bits = 8;
 	return (*this);
@@ -51,12 +55,15 @@ bool Fixed::operator>(const Fixed& op) {
 bool Fixed::operator<=(const Fixed& op){
 	return (this->_val <= op._val);
 }
+
 bool Fixed::operator>=(const Fixed& op) {
 	return (this->_val >= op._val);
 }
+
 bool Fixed::operator==(const Fixed& op) {
 	return (this->_val == op._val);
 }
+
 bool Fixed::operator!=(const Fixed& op) {
 	return (this->_val != op._val);
 }
@@ -81,29 +88,30 @@ Fixed Fixed::operator/(const Fixed& op) const {
 	return out;
 }
 
-Fixed Fixed::&operator++() {
+Fixed &Fixed::operator++() {
 	_val += (1 << _f_bits);
+	return *this;
 }
+
 Fixed Fixed::operator++(int) {
-	_val += (1 << _f_bits);
+	Fixed ret(*this);
+	++(*this);
+	return ret;
 }
 
 Fixed &Fixed::operator--() {
 	_val -= (1 << _f_bits);
+	return *this;
 }
+
 Fixed Fixed::operator--(int) {
-	_val -= (1 << _f_bits);
+	Fixed ret(*this);
+	--(*this);
+	return ret;
 }
-//Fixed &Fixed::operator<=(const Fixed& op);
-//Fixed &Fixed::operator>(const Fixed& op);
-//Fixed &Fixed::operator>=(const Fixed& op);
-//Fixed &Fixed::operator!=(const Fixed& op);
-//Fixed &Fixed::operator==(const Fixed& op);
-//Fixed &Fixed::operator+(const Fixed& op);
-//Fixed &Fixed::operator-(const Fixed& op);
-//Fixed &Fixed::operator*(const Fixed& op);
 
 Fixed::~Fixed() {
+	//std::cout << "Destructor called" << std::endl;
 }  
 
 std::ostream &operator<<(std::ostream &out, const Fixed& op) {
@@ -113,12 +121,10 @@ std::ostream &operator<<(std::ostream &out, const Fixed& op) {
 
 
 int Fixed::getRawBits() const {
-	std::cout << "getRawBits member function called" << std::endl;
 	return _val;
 }
 
 void Fixed::setRawBits(int const raw) {
-	std::cout << "setRawBits member function called" << std::endl;
 	_val = raw;
 }
 

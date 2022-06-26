@@ -4,7 +4,10 @@ OBJ = $(SRC:.cpp=.o)
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 
 
-CC = c++ $(FLAGS)
+CC = c++ 
+
+.cpp.o:
+	$(CC) $(FLAGS) -c $(SRC)
 
 all: $(NAME)
 

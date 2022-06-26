@@ -42,7 +42,6 @@ void *Dog::getBrainAddr() {
 // Cat
 Cat::Cat() : Animal("Cat") {
 	_brain = new Brain;
-	_type = cpy._type;
 	std::cout << "Cat default constructor called\n";
 }
 
@@ -53,6 +52,7 @@ Cat::~Cat() {
 
 Cat::Cat(const Cat &cpy) {
 	_brain = new Brain(*cpy._brain);
+	_type = cpy._type;
 	std::cout << "Cat copy constructor called\n";
 }
 

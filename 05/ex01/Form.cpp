@@ -7,7 +7,7 @@ Form::Form(const std::string &name, int required) throw(F_GRADE_EXCEPT) : _name(
 		throw Form::GradeTooLowException();
 }
 
-Form::Form(const Form &cpy) : _required(cpy._required) {
+Form::Form(const Form &cpy) : _name(cpy._name), _required(cpy._required), _signed(cpy._signed) {
 }
 
 Form::~Form() {
@@ -15,6 +15,7 @@ Form::~Form() {
 }  
 
 Form &Form::operator=(const Form &cpy) {
+	_signed = cpy._signed;
 	return *this;
 }
 
@@ -27,7 +28,7 @@ const std::string &Form::getName() const {
 	return _name;
 }
 
-const int Form::getRequired() const {
+int Form::getRequired() const {
 	return _required;
 }
 
