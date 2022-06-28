@@ -1,44 +1,17 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed() {
-	//std::cout << "Default constructor called" << std::endl;
 	_val = 0;
 	_f_bits = 8;
 }
 
-Fixed::Fixed(const int x) {
-	//std::cout << "Int constructor called" << std::endl;
-	_val = (x << 8);
-	_f_bits = 8;
-}
+Fixed::Fixed(const int x) : _f_bits(8), _val(x << _f_bits) {}
 
+Fixed::Fixed(const float x) : _f_bits(8), _val(x * (1 << _f_bits)) {}
 
-Fixed::Fixed(const float x) {//: _val(roundf(x * 256)) {
-	//std::cout << "Float constructor called" << std::endl;
-
-	// The code below sould be equivalent to _val = x * 256
-	// It was made to check my comprension of float by
-	// doing the multiplication manually on the bitset
-	unsigned int t;
-
-	_f_bits = 8;
-	memcpy(&t, &x, 4);
-	int exp=0, mantis=((t<<1) != 0);
-	for (int i = 7; i >= 0; i--)
-		exp = (exp << 1) | ((t >> (23 + i)) & 1);
-	exp -= 127;
-	for (int i = 22; i >= 0; i--)
-		mantis = (mantis << 1) | ((t >> i) & 1);
-	_val = (exp <= 15 ? mantis >> (15-exp) : mantis << (exp-15)) | (((t >> 31) & 1) << 31);
-}
-
-Fixed::Fixed(const Fixed &cpy) {
-	//std::cout << "Copy constructor called" << std::endl;
-	*this = cpy;
-}
+Fixed::Fixed(const Fixed &cpy) {*this = cpy;}
 
 Fixed &Fixed::operator=(const Fixed &cpy) {
-	//std::cout << "Assignement constructor called" << std::endl;
 	_val = cpy.getRawBits();
 	_f_bits = 8;
 	return (*this);
@@ -69,23 +42,19 @@ bool Fixed::operator!=(const Fixed& op) {
 }
 
 Fixed Fixed::operator+(const Fixed& op) const {
-	//Fixed out((float)this->toFloat() + (float)op.toFloat());
-	//return out;
 	Fixed ret;
 	ret.setRawBits(getRawBits() + op.getRawBits());
 	return ret;
 }
 
 Fixed Fixed::operator-(const Fixed& op) const {
-	//Fixed out((float)this->toFloat() - (float)op.toFloat());
-	//return out;
 	Fixed ret;
 	ret.setRawBits(getRawBits() - op.getRawBits());
 	return ret;
 }
 
 Fixed Fixed::operator*(const Fixed& op) const {
-	Fixed out((float)this->toFloat() * (float)op.toFloat());
+	Fixed out(((float)this->toFloat() * (float)op.toFloat()));
 	return out;
 }
 
@@ -116,12 +85,10 @@ Fixed Fixed::operator--(int) {
 	return ret;
 }
 
-Fixed::~Fixed() {
-	//std::cout << "Destructor called" << std::endl;
-}  
+Fixed::~Fixed() {}  
 
 std::ostream &operator<<(std::ostream &out, const Fixed& op) {
-	std::cout << op.toFloat();
+	out << op.toFloat();
 	return out;
 }
 

@@ -19,8 +19,8 @@ public:
 	int toInt() const;
 
 private:
-	int _val;
 	int	_f_bits;
+	int _val;
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed& op);

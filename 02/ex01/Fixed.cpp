@@ -10,10 +10,8 @@ Fixed::~Fixed() {
 	std::cout << "Destructor called" << std::endl;
 }  
 
-Fixed::Fixed(const int x) {
+Fixed::Fixed(const int x) : _f_bits(8), _val(x << _f_bits) {
 	std::cout << "Int constructor called" << std::endl;
-	_val = x << 8;
-	_f_bits = 8;
 }
 
 Fixed::Fixed(const Fixed &cpy) {
@@ -29,14 +27,18 @@ Fixed &Fixed::operator=(const Fixed &cpy) {
 }
 
 Fixed::Fixed(const float x) {
-	std::cout << "Float constructor called" << std::endl;
+	if (x < 0) {
+		_val = (x * (1 << _f_bits));
+		return ;
+	}
 
-	// The code below sould be equivalent to _val = x * 256
-	// It was made to check my comprension of float by
-	// doing the multiplication manually on the bitset
+	/*	The code below sould be equivalent to _val = x * 256
+		It was made to check my comprension of float by
+		doing the multiplication manually on the bitset
+		(don't work on negative value) */
+
 	unsigned int t;
 
-	_f_bits = 8;
 	memcpy(&t, &x, 4);
 	int exp=0, mantis=((t<<1) != 0);
 	for (int i = 7; i >= 0; i--)
